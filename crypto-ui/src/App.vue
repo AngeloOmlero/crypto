@@ -49,7 +49,7 @@
           <RouterLink
             to="/prices"
             class="px-4 py-2 rounded-md text-base font-medium transition-colors duration-200 no-underline hover:no-underline"
-            :class="$route.path === '/' ? 'bg-[var(--color-primary)] text-white' : 'text-[var(--color-text-dark)] hover:bg-gray-100'"
+            :class="$route.path === '/prices' ? 'bg-[var(--color-primary)] text-white' : 'text-[var(--color-text-dark)] hover:bg-gray-100'"
           >
             Crypto Prices
           </RouterLink>

@@ -20,7 +20,7 @@
           :error="error"
           :value-changes="valueChanges"
           @edit="openEditModal"
-          @delete="confirmAndDeletePortfolio"
+          @delete="deletePortfolio"
           @add-holding="openAddHoldingModal"
           @view="viewPortfolio"
         />
@@ -66,7 +66,7 @@
         @close="closeView"
         @add-holding="openAddHoldingModal"
         @edit-holding="startEditHolding"
-        @delete-holding="confirmAndDeleteHolding"
+        @delete-holding="deleteHolding"
       />
     </main>
   </div>
@@ -196,7 +196,7 @@ const deletePortfolio = async (id: number) => {
     await axios.delete(`/api/crypto/portfolios/${id}`)
     portfolios.value = portfolios.value.filter(p => p.id !== id)
   } catch (err) {
-    console.error(err)
+    console.error('Failed to delete portfolio:', err)
     error.value = 'Failed to delete portfolio.'
   }
 }
@@ -249,7 +249,7 @@ const deleteHolding = async (portfolioId: number, holdingId: number) => {
     await axios.delete(`/api/crypto/portfolios/${portfolioId}/holdings/${holdingId}`)
     await fetchPortfolios(true)
   } catch (err) {
-    console.error(err)
+    console.error('Failed to delete holding:', err)
     error.value = 'Failed to delete holding.'
   }
 }
@@ -373,13 +373,15 @@ const closeEdit = () => {
 }
 
 const confirmAndDeletePortfolio = (id: number) => {
-  if (!confirm('Delete this portfolio?')) return
-  deletePortfolio(id)
+  if (window.confirm('Are you sure you want to delete this portfolio?')) {
+    deletePortfolio(id)
+  }
 }
 
 const confirmAndDeleteHolding = (portfolioId: number, holdingId: number) => {
-  if (!confirm('Delete this holding?')) return
-  deleteHolding(portfolioId, holdingId)
+  if (window.confirm('Are you sure you want to delete this holding?')) {
+    deleteHolding(portfolioId, holdingId)
+  }
 }
 
 const openAddHoldingModal = (portfolioId: number) => {
@@ -452,7 +454,9 @@ const cancelEditHolding = () => {
 
 // ---------------- Watchers & computed ----------------
 watch(assetSearchTerm, (v) => {
-  doAssetFuzzySearch(v)
+  if (!isEditingHolding.value) {
+    doAssetFuzzySearch(v)
+  }
 })
 
 // filtered portfolios for the grid search box (searches portfolio name and holdings' assetId)
