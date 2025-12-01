@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles for a pleasing UI */
+:root {
+  --color-primary: #4A90E2; /* A pleasant blue */
+  --color-secondary: #50E3C2; /* A fresh green */
+  --color-text-dark: #2C3E50; /* Dark text for readability */
+  --color-text-light: #7F8C8D; /* Lighter text for secondary info */
+  --color-background: #F8F9FA; /* Light background */
+  --color-card-background: #FFFFFF; /* White card background */
+  --color-border: #E0E0E0; /* Light border color */
+  --color-success: #2ECC71; /* Green for success */
+  --color-danger: #E74C3C; /* Red for danger */
+}
+
+*{
+   font-family: 'Fira Sans', sans-serif;
+}
+
+
+body {
+  font-family: 'Fira Sans', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Basic link styling */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Add Inter font import - this would typically go in index.html or a global CSS import */
+/* For now, assuming it's available or will be added globally */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); */
+
+/* Custom scrollbar for a cleaner look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B0B0B0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
